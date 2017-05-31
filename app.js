@@ -27,7 +27,7 @@ module.exports = function higherOrderFunction(args) {
 	const origArr = args.toString().split('');
 	let integerArr = origArr.slice();
 	let decimalArr = [];
-	let numStr = '';
+	// let numStr = '';
 
 	// Storing number text values
 	const zero = 'Zero'
@@ -46,13 +46,21 @@ module.exports = function higherOrderFunction(args) {
 	integerArr = _.chunk(integerArr.reverse(), 3);
 
 	// Loop through each "chunk" in the array starting from the right because the array is reversed
-	_.forEachRight(integerArr, function(value, i) {
-		if (value.length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
-			numStr = buildString(numStr, getHundreds(value, i))
+	// _.forEachRight(integerArr, function(value, i) {
+	// 	if (value.length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
+	// 		numStr = buildString(numStr, getHundreds(value, i))
+	// 	} else { // If not 3 then we send it to the getDoubles function
+	// 		numStr = buildString(numStr, getDoubles(value, i))
+	// 	}
+	// });
+
+	let numStr = _.reduceRight(integerArr, function(sum, n, i) {
+		if (integerArr[i].length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
+			return buildString(sum, getHundreds(integerArr[i], i))
 		} else { // If not 3 then we send it to the getDoubles function
-			numStr = buildString(numStr, getDoubles(value, i))
+			return buildString(sum, getDoubles(integerArr[i], i))
 		}
-	});
+	}, '');
 
 	// Creating decimal fraction value if decimal arr has anything in it
 	if (decimalArr.length){
