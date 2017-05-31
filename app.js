@@ -66,9 +66,9 @@ module.exports = function higherOrderFunction(args) {
 	// es6 map
 	numStr = _.map(integerArr.reverse(), function(n, i, arr) {
 		if (n.length === 3) {
-			return getHundreds(n, integerArr.length - (i +1 ) ).trim()
+			return getHundreds(n, arr.length - (i +1 ) ).trim()
 		} else {
-			return getDoubles(n, integerArr.length - (i + 1) ).trim()
+			return getDoubles(n, arr.length - (i + 1) ).trim()
 		}
 	}).filter(Boolean).join(' ');
 
