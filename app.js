@@ -54,27 +54,30 @@ module.exports = function higherOrderFunction(args) {
 	// 	}
 	// });
 
-	// let testarr = [];
-	// testarr = _.map(integerArr.reverse(), function(n, i) {
-	// 	if (n.length === 3) {
-	// 		return getHundreds(n, integerArr.length - (i +1 ) ).trim()
-	// 	} else {
-	// 		return getDoubles(n, integerArr.length - (i + 1) ).trim()
-	// 	}
-	// });
 
-	// es6 map
+
+
+	// es6 map filtering on falsy (false, null, undefined, 0, Nan, '', "")
+	// numStr = _.map(integerArr.reverse(), function(n, i, arr) {
+	// 	if (n.length === 3) {
+	// 		return getHundreds(n, arr.length - (i +1 ) ).trim()
+	// 	} else {
+	// 		return getDoubles(n, arr.length - (i + 1) ).trim()
+	// 	}
+	// }).filter(Boolean).join(' ');
+
+	// Filtering on specific '' values
 	numStr = _.map(integerArr.reverse(), function(n, i, arr) {
 		if (n.length === 3) {
 			return getHundreds(n, arr.length - (i +1 ) ).trim()
 		} else {
 			return getDoubles(n, arr.length - (i + 1) ).trim()
 		}
-	}).filter(Boolean).join(' ');
+	}).filter(function(n){return n != ''}).join(' ');
 
-	// numStr = testarr.filter(Boolean).join(' ');
 
-	// console.log(numStr);
+
+	
 
 	// Creating decimal fraction value if decimal arr has anything in it
 	if (decimalArr.length){
