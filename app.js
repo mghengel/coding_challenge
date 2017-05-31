@@ -46,13 +46,25 @@ module.exports = function higherOrderFunction(args) {
 	integerArr = _.chunk(integerArr.reverse(), 3);
 
 	// Loop through each "chunk" in the array starting from the right because the array is reversed
-	_.forEachRight(integerArr, function(value, i) {
-		if (value.length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
-			numStr = buildString(numStr, getHundreds(value, i))
-		} else { // If not 3 then we send it to the getDoubles function
-			numStr = buildString(numStr, getDoubles(value, i))
+	// _.forEachRight(integerArr, function(value, i) {
+	// 	if (value.length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
+	// 		numStr = buildString(numStr, getHundreds(value, i))
+	// 	} else { // If not 3 then we send it to the getDoubles function
+	// 		numStr = buildString(numStr, getDoubles(value, i))
+	// 	}
+	// });
+
+	let testarr = [];
+	testarr = _.map(integerArr.reverse(), function(n, i) {
+		if (n.length === 3) {
+			return getHundreds(n, integerArr.length - (i +1 ) ).trim()
+		} else {
+			return getDoubles(n, integerArr.length - (i + 1) ).trim()
 		}
 	});
+	numStr = testarr.filter(Boolean).join(' ');
+
+	// console.log(numStr);
 
 	// Creating decimal fraction value if decimal arr has anything in it
 	if (decimalArr.length){
