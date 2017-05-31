@@ -42,7 +42,7 @@ module.exports = function higherOrderFunction(args) {
 		decimalArr = origArr.slice(origArr.indexOf('.') + 1); //Stores all numbers to the right of the decimal
 	}
 
-	// "Divide up the arry into groups of three. Reversing the array allows for the leading numbers to be 3 digits or less for calculation the hundreds spot"
+	// Divide up the arry into groups of three. Reversing the array allows for the leading numbers to be 3 digits or less for calculation the hundreds spot
 	integerArr = _.chunk(integerArr.reverse(), 3);
 
 	// Loop through each "chunk" in the array starting from the right because the array is reversed
@@ -89,18 +89,18 @@ module.exports = function higherOrderFunction(args) {
 	// Everything goes throught the doubles function to determine the nuances between numbers
 	function getDoubles(arr, i){
 		let doubleStr = '';
-		if (arr[1] == 0 || arr.length == 1) { // If array is only one number ( [5] => five )or the second number is a zero ( [3,0,2] => two) get the single number
+		if (arr[1] == 0 || arr.length == 1) { // If array is only one number ( [5] => five )or the second number is a zero ( [3,0,2] => 3) get the single number
 			doubleStr = getOnes(arr[0]);
-		} else if (arr[1] == 1) { // Checks to see of the first number is a "1" and if so it returns a "teen" ( [6,7,1] => seventeen )
+		} else if (arr[1] == 1) { // Checks to see of the first number is a "1" and if so it returns a "teen" ( [7,1,6] => seventeen ) based on the first number
 			doubleStr = teens[arr[0]];
-		} else { // If not a teen then return the "tens" and get the second number from the ones ( [5,3,2] => Twenty-three ) 
+		} else { // If not a teen then return the "tens" and get the second number from the ones ( [3,2,1] => Twenty-three ) 
 			doubleStr = tens[arr[1] - 2] + (arr[0] != 0 ? '-' + getOnes(arr[0]) : '');
 		}
 		// Return double string with returend value from getThousands
 		return doubleStr + (doubleStr.length ? ' ' : '' ) + getThousand(arr, i);	
 	};
 
-	// If the chunked array is three digits long we use the 3rd (last) digit since it is reversed. Three digits mean the number will be a "hundred" number but only if there is not a '0' value in that poistion
+	// If the chunked array is three digits long we use the 3rd (last) digit since it is reversed. Three digits mean the number will be a "hundred" number but only if there is not a '0' value in that position
 	function getHundreds(arr, i){
 		return getOnes(arr[2]) + (arr[2] != 0 ? ' ' + hundred + ' ' : '') + getDoubles(arr, i);
 	};
