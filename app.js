@@ -54,13 +54,31 @@ module.exports = function higherOrderFunction(args) {
 	// 	}
 	// });
 
-	let numStr = _.reduceRight(integerArr, function(sum, n, i) {
-		if (integerArr[i].length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
-			return buildString(sum, getHundreds(integerArr[i], i))
+
+
+
+
+	// let numStr = _.reduceRight(integerArr, function(sum, n, i) {
+	// 	if (integerArr[i].length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
+	// 		return buildString(sum, getHundreds(integerArr[i], i))
+	// 	} else { // If not 3 then we send it to the getDoubles function
+	// 		return buildString(sum, getDoubles(integerArr[i], i))
+	// 	}
+	// }, '');
+
+	let numStr = integerArr.reduceRight(function(sum, n, i, arr) {
+		if (arr[i].length === 3) { // If the chunk has 3 elements then we send it to the hundreds function which will then call the getDoubles function
+			return buildString(sum, getHundreds(arr[i], i))
 		} else { // If not 3 then we send it to the getDoubles function
-			return buildString(sum, getDoubles(integerArr[i], i))
+			return buildString(sum, getDoubles(arr[i], i))
 		}
 	}, '');
+
+
+
+
+
+
 
 	// Creating decimal fraction value if decimal arr has anything in it
 	if (decimalArr.length){
