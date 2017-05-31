@@ -54,15 +54,25 @@ module.exports = function higherOrderFunction(args) {
 	// 	}
 	// });
 
-	let testarr = [];
-	testarr = _.map(integerArr.reverse(), function(n, i) {
+	// let testarr = [];
+	// testarr = _.map(integerArr.reverse(), function(n, i) {
+	// 	if (n.length === 3) {
+	// 		return getHundreds(n, integerArr.length - (i +1 ) ).trim()
+	// 	} else {
+	// 		return getDoubles(n, integerArr.length - (i + 1) ).trim()
+	// 	}
+	// });
+
+	// es6 map
+	numStr = _.map(integerArr.reverse(), function(n, i, arr) {
 		if (n.length === 3) {
 			return getHundreds(n, integerArr.length - (i +1 ) ).trim()
 		} else {
 			return getDoubles(n, integerArr.length - (i + 1) ).trim()
 		}
-	});
-	numStr = testarr.filter(Boolean).join(' ');
+	}).filter(Boolean).join(' ');
+
+	// numStr = testarr.filter(Boolean).join(' ');
 
 	// console.log(numStr);
 
