@@ -6,7 +6,7 @@ describe('Application', () => {
   it('returns desired result', () => {
     assert.deepEqual(application(2523.04), 'Two thousand five hundred twenty-three and 04/100')
     assert.deepEqual(application(2523), 'Two thousand five hundred twenty-three')
-    assert.deepEqual(application(.04), '04/100')
+    assert.deepEqual(application(.04), 'Zero and 04/100')
   })
   it('returns desired result', () => {
     assert.deepEqual(application(2523), 'Two thousand five hundred twenty-three')
@@ -21,16 +21,7 @@ describe('Application', () => {
     assert.deepEqual(application(10), 'Ten')
   })
   it('returns desired result', () => {
-    assert.deepEqual(application(17.3), 'Seventeen and 3/10')
-  })
-  it('returns desired result', () => {
-    assert.deepEqual(application(43.30), 'Forty-three and 3/10')
-  })
-  it('returns desired result', () => {
     assert.deepEqual(application(90), 'Ninety')
-  })
-  it('returns desired result', () => {
-    assert.deepEqual(application(10.04), 'Ten and 04/100')
   })
   it('returns desired result', () => {
     assert.deepEqual(application(0), 'Zero')
@@ -105,6 +96,27 @@ describe('Application', () => {
     assert.deepEqual(application(9999999999999.99), 'The number is too big!')
   })
   it('returns desired result', () => {
+    assert.deepEqual(application(10.04), 'Ten and 04/100')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(10.204), 'Ten and 20/100')
+  })
+  it('returns desired result', () => {
     assert.deepEqual(application('abc'), 'Please supply a number!')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(.04), 'Zero and 04/100')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(17.3), 'Seventeen and 30/100')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(Math.PI), 'Three and 14/100')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(43.30), 'Forty-three and 30/100')
+  })
+  it('returns desired result', () => {
+    assert.deepEqual(application(.9999), 'One')
   })
 });

@@ -24,13 +24,13 @@ module.exports = function higherOrderFunction(args) {
 		return 'The number is too big!';
 	}
 
-	const origArr = args.toString().split('');
+	const origArr = args.toFixed(2).toString().split('');
 	let integerArr = origArr.slice();
 	let decimalArr = [];
 	let numStr = '';
 
 	// Storing number text values
-	const zero = 'Zero'
+	const zero = 'Zero';
 	const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 	const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 	const tens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
@@ -42,7 +42,7 @@ module.exports = function higherOrderFunction(args) {
 		decimalArr = origArr.slice(origArr.indexOf('.') + 1); //Stores all numbers to the right of the decimal
 	}
 
-	// Divide up the arry into groups of three. Reversing the array allows for the leading numbers to be 3 digits or less for calculation the hundreds spot
+	// Divide up the array into groups of three. Reversing the array allows for the leading numbers to be 3 digits or less for calculation the hundreds spot
 	integerArr = _.chunk(integerArr.reverse(), 3);
 
 	// Loop through each "chunk" in the array starting from the right because the array is reversed
@@ -55,10 +55,15 @@ module.exports = function higherOrderFunction(args) {
 	});
 
 	// Creating decimal fraction value if decimal arr has anything in it
-	if (decimalArr.length){
+	if (decimalArr.length && decimalArr.join('') != 0){
 		let numerator = decimalArr.join('');
-		let denominator = Math.pow(10, decimalArr.length);
+		if (numerator.length < 2 ){
+			numerator = numerator * 10;
+		}
+		
+		const denominator = 100;
 
+		numStr = numStr.length ? numStr : zero;
 		let decimalStr = numStr.length ? 'and ' : '';
 		decimalStr += numerator + '/' + denominator;
 
